@@ -157,3 +157,16 @@ weighted sum over individual models with *side information* available
 
 # Conditional Restricted Boltzmann Machines
 ##
+
+
+
+<!-- ----------------------------------------------------------------------- -->
+# Thank you for your attention
+## Links & References
+This: [ahoereth.github.io/motion-models](https://ahoereth.github.io/motion-models)
+
+Neil Lawrence on GPLVMs @ Google: [youtu.be/DS853uA0u4I](https://youtu.be/DS853uA0u4I)
+
+Interactive visualizations available at [github.com/lawrennd/oxford](https://github.com/lawrennd/oxford) (seemingly broken?)
+
+All images from [Visual Analysis of Humans](http://www.springer.com/us/book/9780857299963) (ch.10) and the respective references
