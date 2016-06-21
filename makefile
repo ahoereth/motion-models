@@ -11,4 +11,4 @@ all:
 	       -V width=1680 \
 	       -V height=1050 \
 	       -V viewDistance=9000 \
-	       slides.md -o slides.html
+	       slides.md -o index.html
