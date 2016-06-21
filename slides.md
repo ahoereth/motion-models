@@ -154,9 +154,20 @@ weighted sum over individual models with *side information* available
 ## Hierarchical GPLVM Demo
 <iframe width="640" height="480" src="https://www.youtube.com/embed/DS853uA0u4I?rel=0&start=2735&end=2785&color=white&modestbranding=1&showinfo=0&controls=0" frameborder="0" allowfullscreen></iframe>
 
+## Switching Linear Dynamical Systems
 
+
+
+
+<!-- ----------------------------------------------------------------------- -->
 # Conditional Restricted Boltzmann Machines
-##
+## Restricted Boltzmann Machines
+2 layers, neurons connected between the layers but not within
+
+visible units represent the observation, hidden units the latent space
+
+![](assets/rbm-in.png){height=400px}
+![](assets/rbm-out.png){height=400px}
 
 
 
