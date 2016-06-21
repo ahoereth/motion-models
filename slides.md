@@ -87,17 +87,17 @@ linear combination of mean motion and eigen-motions
 
 $$m \approx \mu + \Sigma_{j=1 \rightarrow B} x_j b_j$$
 
-![4 subjects, varying speeds, ltr: walking, running, both](motioncapture.png)
+![4 subjects, varying speeds, ltr: walking, running, both](assets/motioncapture.png)
 
 
 
 <!-- ----------------------------------------------------------------------- -->
 # Nonlinear Kinematic Models
 ## dimensionality reduction
-![input to nonlinear DR and linear DR](letters.jpg){height=200px}
+![input to nonlinear DR and linear DR](assets/letters.jpg){height=200px}
 
-![nonlinear DR](nldr.jpg){height=300px}
-![linear DR](ldr.png){height=300px}
+![nonlinear DR](assets/nldr.jpg){height=300px}
+![linear DR](assets/ldr.png){height=300px}
 
 ## motivation
 periodic motions follow a cyclic trajectory in high dimensionality
@@ -117,7 +117,7 @@ optimize likelihood of correct latent space $\rightarrow$ pose space mapping
 
 good prior is essential, commonly uses PCA
 
-![GPLVM latent space for one walk cycle](gplvm1.png){height=400px}
+![GPLVM latent space for one walk cycle](assets/gplvm1.png){height=400px}
 
 ## GPLVM demo
 <iframe width="640" height="480" src="https://www.youtube.com/embed/DS853uA0u4I?rel=0&start=1940&end=1980&color=white&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -134,7 +134,7 @@ required for accurate predictions and tracking
 
 GPDM is initialized using GP prior over latent trajectories
 
-![GPDM, ltr: latent training poses, probability, sampling](gpdm.png)
+![GPDM, ltr: latent training poses, probability, sampling](assets/gpdm.png)
 
 ## GPDM demo
 <!-- TODO: this actually is back-constraints -->
@@ -142,14 +142,14 @@ GPDM is initialized using GP prior over latent trajectories
 
 ## GPDM tracking
 
-![GPDM tracking with occlusion](gpdm-tracking.png)
+![GPDM tracking with occlusion](assets/gpdm-tracking.png)
 
 ## Extensions
 ### a) Multi-Factor GPLVM
 weighted sum over individual models with *side information* available
 
 ### b) Hierarchical GPLVM
-![](gplvm-hierarchical.png)
+![](assets/gplvm-hierarchical.png)
 
 ## Hierarchical GPLVM Demo
 <iframe width="640" height="480" src="https://www.youtube.com/embed/DS853uA0u4I?rel=0&start=2735&end=2785&color=white&modestbranding=1&showinfo=0&controls=0" frameborder="0" allowfullscreen></iframe>

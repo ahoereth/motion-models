@@ -100,16 +100,16 @@ linear subspace projection and subspace LDS -->
 <p>linear combination of mean motion and eigen-motions</p>
 <p><span class="math display">\[m \approx \mu + \Sigma_{j=1 \rightarrow B} x_j b_j\]</span></p>
 <figure>
-<img src="motioncapture.png" alt="4 subjects, varying speeds, ltr: walking, running, both" /><figcaption>4 subjects, varying speeds, ltr: walking, running, both</figcaption>
+<img src="assets/motioncapture.png" alt="4 subjects, varying speeds, ltr: walking, running, both" /><figcaption>4 subjects, varying speeds, ltr: walking, running, both</figcaption>
 </figure>
 <!-- ----------------------------------------------------------------------- -->
 </section></section>
 <section><section id="nonlinear-kinematic-models" class="titleslide slide level1"><h1>Nonlinear Kinematic Models</h1></section><section id="dimensionality-reduction" class="slide level2">
 <h1>dimensionality reduction</h1>
 <figure>
-<img src="letters.jpg" alt="input to nonlinear DR and linear DR" height="200" /><figcaption>input to nonlinear DR and linear DR</figcaption>
+<img src="assets/letters.jpg" alt="input to nonlinear DR and linear DR" height="200" /><figcaption>input to nonlinear DR and linear DR</figcaption>
 </figure>
-<p><img src="nldr.jpg" alt="nonlinear DR" height="300" /> <img src="ldr.png" alt="linear DR" height="300" /></p>
+<p><img src="assets/nldr.jpg" alt="nonlinear DR" height="300" /> <img src="assets/ldr.png" alt="linear DR" height="300" /></p>
 </section><section id="motivation" class="slide level2">
 <h1>motivation</h1>
 <p>periodic motions follow a cyclic trajectory in high dimensionality</p>
@@ -124,7 +124,7 @@ linear subspace projection and subspace LDS -->
 <p>optimize likelihood of correct latent space <span class="math inline">\(\rightarrow\)</span> pose space mapping</p>
 <p>good prior is essential, commonly uses PCA</p>
 <figure>
-<img src="gplvm1.png" alt="GPLVM latent space for one walk cycle" height="400" /><figcaption>GPLVM latent space for one walk cycle</figcaption>
+<img src="assets/gplvm1.png" alt="GPLVM latent space for one walk cycle" height="400" /><figcaption>GPLVM latent space for one walk cycle</figcaption>
 </figure>
 </section><section id="gplvm-demo" class="slide level2">
 <h1>GPLVM demo</h1>
@@ -139,7 +139,7 @@ linear subspace projection and subspace LDS -->
 <p>required for accurate predictions and tracking</p>
 <p>GPDM is initialized using GP prior over latent trajectories</p>
 <figure>
-<img src="gpdm.png" alt="GPDM, ltr: latent training poses, probability, sampling" /><figcaption>GPDM, ltr: latent training poses, probability, sampling</figcaption>
+<img src="assets/gpdm.png" alt="GPDM, ltr: latent training poses, probability, sampling" /><figcaption>GPDM, ltr: latent training poses, probability, sampling</figcaption>
 </figure>
 </section><section id="gpdm-demo" class="slide level2">
 <h1>GPDM demo</h1>
@@ -149,7 +149,7 @@ linear subspace projection and subspace LDS -->
 </section><section id="gpdm-tracking" class="slide level2">
 <h1>GPDM tracking</h1>
 <figure>
-<img src="gpdm-tracking.png" alt="GPDM tracking with occlusion" /><figcaption>GPDM tracking with occlusion</figcaption>
+<img src="assets/gpdm-tracking.png" alt="GPDM tracking with occlusion" /><figcaption>GPDM tracking with occlusion</figcaption>
 </figure>
 </section><section id="extensions" class="slide level2">
 <h1>Extensions</h1>
@@ -157,7 +157,7 @@ linear subspace projection and subspace LDS -->
 <p>weighted sum over individual models with <em>side information</em> available</p>
 <h3 id="b-hierarchical-gplvm">b) Hierarchical GPLVM</h3>
 <figure>
-<img src="gplvm-hierarchical.png" />
+<img src="assets/gplvm-hierarchical.png" />
 </figure>
 </section><section id="hierarchical-gplvm-demo" class="slide level2">
 <h1>Hierarchical GPLVM Demo</h1>
