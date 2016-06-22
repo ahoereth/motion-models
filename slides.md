@@ -156,11 +156,6 @@ weighted sum over individual models with *side information* available
 
 ## Switching Linear Dynamical Systems
 
-
-
-
-<!-- ----------------------------------------------------------------------- -->
-# Conditional Restricted Boltzmann Machines
 ## Restricted Boltzmann Machines
 2 layers, neurons connected between the layers but not within
 
@@ -169,6 +164,31 @@ visible units represent the observation, hidden units the latent space
 ![](assets/rbm-in.png){height=400px}
 ![](assets/rbm-out.png){height=400px}
 
+## Conditional RBM
+extension of RBMs to handle time-series data
+
+added temporal input and autoregression: past n inputs influence current input and hidden layers
+
+autoregressive weights model short-term temporal structure
+
+hidden units model longer-term, higher level structure
+
+
+<!-- ----------------------------------------------------------------------- -->
+# Newtonian Models
+## physics potential
+
+$M\ddot{y} = f_{joints} + f_{gravity} + f_{contact} + a\quad$ *mass $m$, acceleration $\ddot{y}$, forces $f$*
+
+physically plausible motions: e.g. balance or interactions
+
+better generalization: e.g. walking vs. walking while carrying heavy object
+
+no need for a lot motion capture data for training
+
+##
+
+![](assets/physics.png)
 
 
 <!-- ----------------------------------------------------------------------- -->

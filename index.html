@@ -165,13 +165,30 @@ linear subspace projection and subspace LDS -->
 </iframe>
 </section><section id="switching-linear-dynamical-systems" class="slide level2">
 <h1>Switching Linear Dynamical Systems</h1>
-<!-- ----------------------------------------------------------------------- -->
-</section></section>
-<section><section id="conditional-restricted-boltzmann-machines" class="titleslide slide level1"><h1>Conditional Restricted Boltzmann Machines</h1></section><section id="restricted-boltzmann-machines" class="slide level2">
+</section><section id="restricted-boltzmann-machines" class="slide level2">
 <h1>Restricted Boltzmann Machines</h1>
 <p>2 layers, neurons connected between the layers but not within</p>
 <p>visible units represent the observation, hidden units the latent space</p>
 <p><img src="assets/rbm-in.png" height="400" /> <img src="assets/rbm-out.png" height="400" /></p>
+</section><section id="conditional-rbm" class="slide level2">
+<h1>Conditional RBM</h1>
+<p>extension of RBMs to handle time-series data</p>
+<p>added temporal input and autoregression: past n inputs influence current input and hidden layers</p>
+<p>autoregressive weights model short-term temporal structure</p>
+<p>hidden units model longer-term, higher level structure</p>
+<!-- ----------------------------------------------------------------------- -->
+</section></section>
+<section><section id="newtonian-models" class="titleslide slide level1"><h1>Newtonian Models</h1></section><section id="physics-potential" class="slide level2">
+<h1>physics potential</h1>
+<p><span class="math inline">\(M\ddot{y} = f_{joints} + f_{gravity} + f_{contact} + a\quad\)</span> <em>mass <span class="math inline">\(m\)</span>, acceleration <span class="math inline">\(\ddot{y}\)</span>, forces <span class="math inline">\(f\)</span></em></p>
+<p>physically plausible motions: e.g. balance or interactions</p>
+<p>better generalization: e.g. walking vs. walking while carrying heavy object</p>
+<p>no need for a lot motion capture data for training</p>
+</section><section id="section" class="slide level2">
+<h1></h1>
+<figure>
+<img src="assets/physics.png" />
+</figure>
 <!-- ----------------------------------------------------------------------- -->
 </section></section>
 <section><section id="thank-you-for-your-attention" class="titleslide slide level1"><h1>Thank you for your attention</h1></section><section id="links-references" class="slide level2">
