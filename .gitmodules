@@ -2,5 +2,41 @@
 	path = reveal.js
 	url = https://github.com/hakimel/reveal.js
 [submodule "oxford"]
-	path = oxford
+	path = lib/oxford
 	url = https://github.com/lawrennd/oxford
+[submodule "gp"]
+	path = lib/gp
+	url = https://github.com/lawrennd/gp.git
+[submodule "netlab"]
+	path = lib/netlab
+	url = https://github.com/sods/netlab.git
+[submodule "ndlutil"]
+	path = lib/ndlutil
+	url = https://github.com/lawrennd/ndlutil.git
+[submodule "kern"]
+	path = lib/kern
+	url = https://github.com/lawrennd/kern.git
+[submodule "noise"]
+	path = lib/noise
+	url = https://github.com/lawrennd/noise.git
+[submodule "prior"]
+	path = lib/prior
+	url = https://github.com/lawrennd/prior.git
+[submodule "optimi"]
+	path = lib/optimi
+	url = https://github.com/lawrennd/optimi.git
+[submodule "mocap"]
+	path = lib/mocap
+	url = https://github.com/lawrennd/mocap.git
+[submodule "fgplvm"]
+	path = lib/fgplvm
+	url = https://github.com/lawrennd/fgplvm.git
+[submodule "datasets"]
+	path = lib/datasets
+	url = https://github.com/lawrennd/datasets.git
+[submodule "mltools"]
+	path = lib/mltools
+	url = https://github.com/lawrennd/mltools.git
+[submodule "hgplvm"]
+	path = lib/hgplvm
+	url = https://github.com/lawrennd/hgplvm.git
