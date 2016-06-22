@@ -196,8 +196,9 @@ no need for a lot motion capture data for training
 ## Links & References
 This: [ahoereth.github.io/motion-models](https://ahoereth.github.io/motion-models)
 
+All images from [Visual Analysis of Humans](http://www.springer.com/us/book/9780857299963) (ch.10) and the respective references
+
 Neil Lawrence on GPLVMs @ Google: [youtu.be/DS853uA0u4I](https://youtu.be/DS853uA0u4I)
 
-Interactive visualizations available at [github.com/lawrennd/oxford](https://github.com/lawrennd/oxford) (seemingly broken?)
-
-All images from [Visual Analysis of Humans](http://www.springer.com/us/book/9780857299963) (ch.10) and the respective references
+Interactive visualizations by Neil Lawrence: [github.com/lawrennd/oxford](https://github.com/lawrennd/oxford)  
+*seems to be broken, fixed version available on [github.com/ahoereth/motion-models/tree/lawrennd](github.com/ahoereth/motion-models/tree/lawrennd)*
