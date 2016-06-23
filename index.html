@@ -36,46 +36,53 @@
 
 <section><section id="introduction" class="titleslide slide level1"><h1>Introduction</h1></section><section id="multiple-cameras..." class="slide level2">
 <h1>multiple cameras...</h1>
-<p><strong>make motion detection straightforward</strong></p>
+<p><strong>make motion detection rather straightforward</strong></p>
 </section><section id="monocularity" class="slide level2">
 <h1>monocularity</h1>
 <p>makes things more difficult:</p>
 <ul>
 <li class="fragment">noise</li>
 <li class="fragment">occlusion</li>
+<li class="fragment">...</li>
 </ul>
 <p><strong>we require prior information</strong></p>
 </section><section id="prior-models" class="slide level2">
 <h1>prior models</h1>
-<p>sufficiently general to admit all possible motions<br />
+<p>estimate plausible poses using probabilities</p>
+<p><br />
+<br />
+sufficiently general to admit all possible motions<br />
 &lt;&gt;<br />
 strong enough to resolve ambiguities</p>
 </section><section id="state-of-the-art" class="slide level2">
 <h1>state of the art</h1>
 <p>activity specific models from motion capturing</p>
 <p><strong>Problem:</strong> Pose and motion data is extremely high dimensional, difficult to visualize and expensive to compute on.</p>
+</section><section id="bayesian-filtering" class="slide level2">
+<h1>Bayesian Filtering</h1>
+<p>approximate the posterior probability distribution over human poses<br />
+or motions given image observations</p>
+<p><span class="math inline">\(p(x_{1:t}|z_{1:t}) = p(z_{1:t}|x_{1:t})p(x_{1:t}) / p(z_{1:t})\)</span><br />
+states <span class="math inline">\(x_{1:t}\)</span>, observations <span class="math inline">\(z_{1:t}\)</span>, time <span class="math inline">\(t\)</span></p>
+</section><section id="high-dimensionality" class="slide level2">
+<h1>high dimensionality</h1>
+<p>computing the posterior distribution is intractable</p>
+<ul>
+<li class="fragment">assume state independence <span class="math inline">\(p(z_{1:t}|x_{1:t}) = \prod_{i=1:t}p(z_i|x_i)\)</span></li>
+<li class="fragment">assume markov process <span class="math inline">\(p(x_t|x_{1:t-1}) = p(x_t|x_{t-1})\)</span></li>
+</ul>
 <!-- ----------------------------------------------------------------------- -->
 </section></section>
-<section><section id="human-pose-tracking" class="titleslide slide level1"><h1>Human Pose Tracking</h1></section><section id="bayesian-filtering" class="slide level2">
-<h1>Bayesian Filtering</h1>
-<p>maximum a posterior probable motion distribution</p>
-<p><span class="math inline">\(p(x_{1:t}|z_{1:t}) = p(z_{1:t}|x_{1:t})p(x_{1:t}) / p(z_{1:t})\)</span><br />
-time <span class="math inline">\(t\)</span>, states <span class="math inline">\(x_{1:t}\)</span>, observations <span class="math inline">\(z_{1:t}\)</span></p>
-<p><span class="math inline">\(\rightarrow\)</span> to complex to calculate</p>
-</section><section id="further-simplify-able" class="slide level2">
-<h1>further simplify-able</h1>
-</section><section id="initial-pose-guess" class="slide level2">
-<h1>initial pose guess</h1>
-</section><section id="kinematic-joint-limits" class="slide level2">
-<h1>Kinematic Joint Limits</h1>
-<p>limited range of motion in each joint detected poses need to satisfy valid biomechanics can be used to capture plausibility of pose estimates</p>
+<section><section id="kinematics" class="titleslide slide level1"><h1>Kinematics</h1></section><section id="joint-limits" class="slide level2">
+<h1>Joint Limits</h1>
+<p>limited range of motion in each joint</p>
+<p>detected poses need to satisfy valid biomechanics</p>
+<p>can be used to capture plausibility of pose estimates</p>
 </section><section id="smooth-motion" class="slide level2">
 <h1>Smooth Motion</h1>
 <p>every new pose equals the old pose with some added noise<br />
 <span class="math inline">\(y_{t+1} = y_{t} + \eta\)</span></p>
 <p><span class="math inline">\(y_{t+1} = y_{t} + \kappa(y_t - y_{t-1}) + \eta\)</span></p>
-</section><section id="linear-dynamic-system" class="slide level2">
-<h1>Linear Dynamic System</h1>
 <!-- ----------------------------------------------------------------------- -->
 </section></section>
 <section><section id="linear-kinematic-models" class="titleslide slide level1"><h1>Linear Kinematic Models</h1></section><section id="pose-data" class="slide level2">
@@ -84,20 +91,15 @@ time <span class="math inline">\(t\)</span>, states <span class="math inline">\(
 <p><span class="math inline">\(\mathbb{D} = \{y^{(i)}\}_{i=1,...,\mathcal{N}}\)</span><br />
 <span class="math inline">\(y^{(i)} \in \mathcal{R}^D\)</span></p>
 <p>N poses y each consisting of D joint angles</p>
+<p>a motion is a sequence of poses: <span class="math inline">\(m = (y_1,...,y_m)\)</span></p>
 </section><section id="pose-space" class="slide level2">
 <h1>pose space</h1>
 <p>activities exhibit strong regularities</p>
-<p><span class="math inline">\(\rightarrow\)</span> data from a single activity is likely to be clustered</p>
+<p><span class="math inline">\(\rightarrow\)</span> data from a single activity is likely to be clustered in high dimension</p>
 <p><span class="math inline">\(\rightarrow\)</span> eigen-poses can be constructed for complexity reduction</p>
-<!--
-## Dynamic Texture
-linear subspace projection and subspace LDS -->
-</section><section id="motion-pose-seq." class="slide level2">
-<h1>motion == pose seq.</h1>
-<p><span class="math inline">\(m = (y_1,...,y_m)\)</span></p>
 </section><section id="motion-pca" class="slide level2">
 <h1>motion PCA</h1>
-<p>linear combination of mean motion and eigen-motions</p>
+<p>linear combination of mean motion and eigen-motions characterized by scalar coefficients</p>
 <p><span class="math display">\[m \approx \mu + \Sigma_{j=1 \rightarrow B} x_j b_j\]</span></p>
 <figure>
 <img src="assets/motioncapture.png" alt="4 subjects, varying speeds, ltr: walking, running, both" /><figcaption>4 subjects, varying speeds, ltr: walking, running, both</figcaption>
@@ -115,17 +117,35 @@ linear subspace projection and subspace LDS -->
 <p>periodic motions follow a cyclic trajectory in high dimensionality</p>
 <p>linear models require many dimensions to appropriately span the data</p>
 <p>nonlinear manifolds can model those structures better</p>
+</section><section id="gaussians" class="slide level2">
+<h1>gaussians</h1>
+<p><br />
+<br />
+univariate <span class="math inline">\(\rightarrow\)</span> multivariate <span class="math inline">\(\rightarrow\)</span> processes</p>
+<p><br />
+<br />
+[drawings]</p>
 </section><section id="gaussian-processes" class="slide level2">
 <h1>gaussian processes</h1>
-<p>univariate <span class="math inline">\(\rightarrow\)</span> multivariate <span class="math inline">\(\rightarrow\)</span> processes</p>
+<p><span class="math inline">\(f \sim GP(m, k)\)</span><br />
+function <span class="math inline">\(f\)</span> is distributed as a GP with mean function <span class="math inline">\(m\)</span> and covariance function <span class="math inline">\(k\)</span></p>
+<p>this is a superset of a gaussian distribution<br />
+<span class="math inline">\(f \sim \mathcal{N}(\mu_{1:n}, \sigma_{1:n,1:n})\)</span><br />
+<span class="math inline">\(\mu_i = m(x_i)\quad\)</span> <span class="math inline">\(\sigma_{ij} = k(x_i, x_j)\)</span></p>
+</section><section id="training-gaussian-processes" class="slide level2">
+<h1>training gaussian processes</h1>
+<p><span class="math inline">\(k(x,x&#39;) = \alpha exp\left(-\gamma/2 * ||x-x&#39;||^2\right) + \beta \delta(x,x&#39;)\)</span></p>
+<p>Hyperparameters <span class="math inline">\(\theta={\alpha, \gamma, \beta}\)</span></p>
+<p><span class="math inline">\(p(Y|\{x^{(i)}\}, \theta) = \prod_{d=1:D} (1/((2\pi)^N|K|)^{-1}) exp(-1/2 * y_d^T * K^{-1} y_d)\)</span></p>
+<p>training tupels of vectors <span class="math inline">\({(x^{(i)}, y^{(i)})}_{i=1:N}\)</span>, <span class="math inline">\(y_d\)</span> being a vector of every <em>dth</em> element <!--
+$f_*|f \sim \mathcal{N}(\mu_* + \sigma_*) --></p>
 </section><section id="gp-latent-variable-model" class="slide level2">
 <h1>GP Latent Variable Model</h1>
 <p>utilizes gaussian processes to predict samples from latent variables</p>
-<p>optimize likelihood of correct latent space <span class="math inline">\(\rightarrow\)</span> pose space mapping</p>
-<p>good prior is essential, commonly uses PCA</p>
-<figure>
-<img src="assets/gplvm1.png" alt="GPLVM latent space for one walk cycle" height="400" /><figcaption>GPLVM latent space for one walk cycle</figcaption>
-</figure>
+<p>main feature: predictive distribution</p>
+<p>unsupervised, we only know the observations and not latent space</p>
+<p>optimization happens through evaluating for correct latent space <span class="math inline">\(\rightarrow\)</span> pose space mapping</p>
+<p>initialized with broad gaussians</p>
 </section><section id="gplvm-demo" class="slide level2">
 <h1>GPLVM demo</h1>
 <iframe width="640" height="480" src="https://www.youtube.com/embed/DS853uA0u4I?rel=0&amp;start=1940&amp;end=1980&amp;color=white&amp;modestbranding=1&amp;showinfo=0" frameborder="0" allowfullscreen>
@@ -133,11 +153,10 @@ linear subspace projection and subspace LDS -->
 </section><section id="gp-dynamical-model" class="slide level2">
 <h1>GP Dynamical Model</h1>
 <p>GPLVM is sampled from independent training data -- ignores temporal relations</p>
-<p>intuition for the latent space gets lost because of missing spatial proximity</p>
-<!-- TODO: not part of GPDM! -->
+<p>intuition for the latent space got lost because of missing spatial proximity</p>
 <p><strong>smooth pose trajectories <span class="math inline">\(\rightarrow\)</span> smooth latent trajectories</strong></p>
 <p>required for accurate predictions and tracking</p>
-<p>GPDM is initialized using GP prior over latent trajectories</p>
+<p>GPDM is initialized using GP prior over latent sequences</p>
 <figure>
 <img src="assets/gpdm.png" alt="GPDM, ltr: latent training poses, probability, sampling" /><figcaption>GPDM, ltr: latent training poses, probability, sampling</figcaption>
 </figure>
@@ -184,8 +203,10 @@ linear subspace projection and subspace LDS -->
 <p>physically plausible motions: e.g. balance or interactions</p>
 <p>better generalization: e.g. walking vs. walking while carrying heavy object</p>
 <p>no need for a lot motion capture data for training</p>
-</section><section id="section" class="slide level2">
-<h1></h1>
+</section><section id="just-potential" class="slide level2">
+<h1>just potential</h1>
+<p>while very promising, not yet very well researched</p>
+<p>models like this are strongly used in gaming</p>
 <figure>
 <img src="assets/physics.png" />
 </figure>
@@ -194,9 +215,10 @@ linear subspace projection and subspace LDS -->
 <section><section id="thank-you-for-your-attention" class="titleslide slide level1"><h1>Thank you for your attention</h1></section><section id="links-references" class="slide level2">
 <h1>Links &amp; References</h1>
 <p>This: <a href="https://ahoereth.github.io/motion-models">ahoereth.github.io/motion-models</a></p>
-<p>Neil Lawrence on GPLVMs @ Google: <a href="https://youtu.be/DS853uA0u4I">youtu.be/DS853uA0u4I</a></p>
-<p>Interactive visualizations available at <a href="https://github.com/lawrennd/oxford">github.com/lawrennd/oxford</a> (seemingly broken?)</p>
 <p>All images from <a href="http://www.springer.com/us/book/9780857299963">Visual Analysis of Humans</a> (ch.10) and the respective references</p>
+<p>Neil Lawrence on GPLVMs @ Google: <a href="https://youtu.be/DS853uA0u4I">youtu.be/DS853uA0u4I</a></p>
+<p>Interactive visualizations by Neil Lawrence: <a href="https://github.com/lawrennd/oxford">github.com/lawrennd/oxford</a><br />
+<em>seems to be broken, fixed version available on <a href="github.com/ahoereth/motion-models/tree/lawrennd" class="uri">github.com/ahoereth/motion-models/tree/lawrennd</a></em></p>
 </section></section>
     </div>
   </div>

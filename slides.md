@@ -4,17 +4,23 @@
 
 # Introduction
 ## multiple cameras...
-**make motion detection straightforward**
+**make motion detection rather straightforward**
 
 ## monocularity
 makes things more difficult:
 
 * noise
 * occlusion
+* ...
 
 **we require prior information**
 
 ## prior models
+estimate plausible poses using probabilities
+
+\
+\
+
 sufficiently general to admit all possible motions  
 <>  
 strong enough to resolve ambiguities
@@ -24,26 +30,28 @@ activity specific models from motion capturing
 
 **Problem:** Pose and motion data is extremely high dimensional, difficult to visualize and expensive to compute on.
 
+## Bayesian Filtering
+approximate the posterior probability distribution over human poses  
+or motions given image observations
+
+$p(x_{1:t}|z_{1:t}) = p(z_{1:t}|x_{1:t})p(x_{1:t}) / p(z_{1:t})$  
+states $x_{1:t}$, observations $z_{1:t}$, time $t$
+
+## high dimensionality
+computing the posterior distribution is intractable
+
+* assume state independence $p(z_{1:t}|x_{1:t}) = \prod_{i=1:t}p(z_i|x_i)$
+* assume markov process $p(x_t|x_{1:t-1}) = p(x_t|x_{t-1})$
+
 
 
 <!-- ----------------------------------------------------------------------- -->
-# Human Pose Tracking
-## Bayesian Filtering
-
-maximum a posterior probable motion distribution
-
-$p(x_{1:t}|z_{1:t}) = p(z_{1:t}|x_{1:t})p(x_{1:t}) / p(z_{1:t})$  
-time $t$, states $x_{1:t}$, observations $z_{1:t}$
-
-$\rightarrow$ to complex to calculate
-
-## further simplify-able
-
-## initial pose guess
-
-## Kinematic Joint Limits
+# Kinematics
+## Joint Limits
 limited range of motion in each joint
+
 detected poses need to satisfy valid biomechanics
+
 can be used to capture plausibility of pose estimates
 
 ## Smooth Motion
@@ -51,8 +59,6 @@ every new pose equals the old pose with some added noise
 $y_{t+1} = y_{t} + \eta$
 
 $y_{t+1} = y_{t} + \kappa(y_t - y_{t-1}) + \eta$
-
-## Linear Dynamic System
 
 
 
@@ -66,24 +72,18 @@ $y^{(i)} \in \mathcal{R}^D$
 
 N poses y each consisting of D joint angles
 
+a motion is a sequence of poses: $m = (y_1,...,y_m)$
+
 ## pose space
 activities exhibit strong regularities  
 
-$\rightarrow$ data from a single activity is likely to be clustered
+$\rightarrow$ data from a single activity is likely to be clustered in high dimension
 
 $\rightarrow$ eigen-poses can be constructed for complexity reduction
 
-<!--
-## Dynamic Texture
-linear subspace projection and subspace LDS -->
-
-## motion == pose seq.
-
-$m = (y_1,...,y_m)$
 
 ## motion PCA
-
-linear combination of mean motion and eigen-motions
+linear combination of mean motion and eigen-motions characterized by scalar coefficients
 
 $$m \approx \mu + \Sigma_{j=1 \rightarrow B} x_j b_j$$
 
@@ -106,18 +106,49 @@ linear models require many dimensions to appropriately span the data
 
 nonlinear manifolds can model those structures better
 
-## gaussian processes
+## gaussians
+
+\
+\
 
 univariate $\rightarrow$ multivariate $\rightarrow$ processes
+
+\
+\
+
+[drawings]
+
+## gaussian processes
+$f \sim GP(m, k)$  
+function $f$ is distributed as a GP with mean function $m$ and covariance function $k$
+
+this is a superset of a gaussian distribution  
+$f \sim \mathcal{N}(\mu_{1:n}, \sigma_{1:n,1:n})$  
+$\mu_i = m(x_i)\quad$ $\sigma_{ij} = k(x_i, x_j)$
+
+## training gaussian processes
+
+$k(x,x') = \alpha exp\left(-\gamma/2 * ||x-x'||^2\right) + \beta \delta(x,x')$
+
+Hyperparameters $\theta={\alpha, \gamma, \beta}$
+
+$p(Y|\{x^{(i)}\}, \theta) = \prod_{d=1:D} (1/((2\pi)^N|K|)^{-1}) exp(-1/2 * y_d^T * K^{-1} y_d)$
+
+training tupels of vectors ${(x^{(i)}, y^{(i)})}_{i=1:N}$, $y_d$ being a vector of every *dth* element
+<!--
+$f_*|f \sim \mathcal{N}(\mu_* + \sigma_*) -->
+
 
 ## GP Latent Variable Model
 utilizes gaussian processes to predict samples from latent variables
 
-optimize likelihood of correct latent space $\rightarrow$ pose space mapping
+main feature: predictive distribution
 
-good prior is essential, commonly uses PCA
+unsupervised, we only know the observations and not latent space
 
-![GPLVM latent space for one walk cycle](assets/gplvm1.png){height=400px}
+optimization happens through evaluating for correct latent space $\rightarrow$ pose space mapping
+
+initialized with broad gaussians
 
 ## GPLVM demo
 <iframe width="640" height="480" src="https://www.youtube.com/embed/DS853uA0u4I?rel=0&start=1940&end=1980&color=white&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -125,14 +156,13 @@ good prior is essential, commonly uses PCA
 ## GP Dynamical Model
 GPLVM is sampled from independent training data -- ignores temporal relations
 
-intuition for the latent space gets lost because of missing spatial proximity
+intuition for the latent space got lost because of missing spatial proximity
 
-<!-- TODO: not part of GPDM! -->
 **smooth pose trajectories $\rightarrow$ smooth latent trajectories**
 
 required for accurate predictions and tracking
 
-GPDM is initialized using GP prior over latent trajectories
+GPDM is initialized using GP prior over latent sequences
 
 ![GPDM, ltr: latent training poses, probability, sampling](assets/gpdm.png)
 
@@ -186,7 +216,11 @@ better generalization: e.g. walking vs. walking while carrying heavy object
 
 no need for a lot motion capture data for training
 
-##
+## just potential
+
+while very promising, not yet very well researched
+
+models like this are strongly used in gaming
 
 ![](assets/physics.png)
 
